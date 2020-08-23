@@ -50,7 +50,7 @@ export class LoginFormComponent extends Component {
                                         }) => (
                                                 <Form noValidate onSubmit={handleSubmit}>
                                                     <Form.Group controlId="formBasicEmail">
-                                                        <Form.Label>Email address</Form.Label>
+                                                        <Form.Label>Email</Form.Label>
                                                         <Form.Control name="email" type="email" placeholder="Enter email" onChange={handleChange} value={values.email} isInvalid={!!errors.email} />
                                                         <Form.Control.Feedback type="invalid">
                                                             {errors.email}
