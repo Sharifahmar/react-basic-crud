@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+
 
 
 const loginFormSchema = Yup.object().shape({
@@ -16,12 +19,16 @@ export class LoginFormComponent extends Component {
         super(props)
 
         this.state = {
-            email:"",
-            password:""
+            email: "",
+            password: "",
+            isSignedUp: false
         }
     }
 
     render() {
+        if (this.state.isSignedUp) {
+            return <Redirect to={{ pathname: "/Home" }} />;
+        }
         return (
             <div>
                 <Container fluid className="mt-5">
@@ -35,11 +42,20 @@ export class LoginFormComponent extends Component {
                                         onSubmit={(values, { setSubmitting, resetForm }) => {
                                             // When button submits form and form is in the process of submitting, submit button is disabled
                                             setSubmitting(true);
-                                            this.setState({email:values.email,password:values.password});
+                                            this.setState({ email: values.email, password: values.password });
                                             // Resets form after submission is complete
                                             resetForm();
                                             // Sets setSubmitting to false after form is reset
                                             setSubmitting(false);
+                                            axios.post(`https://reqres.in/api/login`, this.state)
+                                                .then(res => {
+                                                    console.log(res);
+                                                    this.setState({ isSignedUp: true });
+                                                })
+                                                .catch(function (error) {
+                                                    console.log(error);
+                                                });
+
                                         }}>
                                         {({
                                             handleSubmit,
