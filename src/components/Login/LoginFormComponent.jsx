@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 
@@ -20,15 +20,11 @@ export class LoginFormComponent extends Component {
 
         this.state = {
             email: "",
-            password: "",
-            isSignedUp: false
+            password: ""
         }
     }
 
     render() {
-        if (this.state.isSignedUp) {
-            return <Redirect to={{ pathname: "/Home" }} />;
-        }
         return (
             <div>
                 <Container fluid className="mt-5">
@@ -50,7 +46,7 @@ export class LoginFormComponent extends Component {
                                             axios.post(`https://reqres.in/api/login`, this.state)
                                                 .then(res => {
                                                     console.log(res);
-                                                    this.setState({ isSignedUp: true });
+                                                    this.props.history.push('/Home');
                                                 })
                                                 .catch(function (error) {
                                                     console.log(error);
@@ -96,4 +92,4 @@ export class LoginFormComponent extends Component {
     }
 }
 
-export default LoginFormComponent
+export default withRouter(LoginFormComponent)
