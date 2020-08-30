@@ -21,7 +21,7 @@ export class RegisterComponent extends Component {
             email: "",
             fname: "",
             lname: "",
-            password:"abc"
+            password: "abc"
         }
     }
 
@@ -40,10 +40,7 @@ export class RegisterComponent extends Component {
                                             // When button submits form and form is in the process of submitting, submit button is disabled
                                             setSubmitting(true);
                                             this.setState({ email: values.email, fname: values.fname, lname: values.lname });
-                                            // Resets form after submission is complete
-                                            resetForm();
-                                            // Sets setSubmitting to false after form is reset
-                                            setSubmitting(false);
+
                                             axios.post(`https://reqres.in/api/register`, this.state)
                                                 .then(res => {
                                                     console.log(res);
@@ -52,6 +49,12 @@ export class RegisterComponent extends Component {
                                                 .catch(function (error) {
                                                     console.log(error);
                                                 });
+
+                                            // Resets form after submission is complete
+                                            resetForm();
+                                            // Sets setSubmitting to false after form is reset
+                                            setSubmitting(false);
+
 
                                         }}>
                                         {({
