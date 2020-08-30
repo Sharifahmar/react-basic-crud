@@ -15,13 +15,19 @@ const App = () => {
       <Suspense fallback={<Spinner animation="border" variant="secondary" />}>
         <Switch>
           <Route exact path="/">
-            <LoginLazyComponent />
+            <ErrorBoundary>
+              <LoginLazyComponent />
+            </ErrorBoundary>
           </Route>
           <Route path="/Home">
-            <HomeLazyComponent />
+            <ErrorBoundary>
+              <HomeLazyComponent />
+            </ErrorBoundary>
           </Route>
           <Route path="/Register">
-            <RegisterLazyComponent />
+            <ErrorBoundary>
+              <RegisterLazyComponent />
+            </ErrorBoundary>
           </Route>
           <Route path="/ErrorBoundary">
             <ErrorBoundary>
@@ -29,7 +35,9 @@ const App = () => {
             </ErrorBoundary>
           </Route>
           <Route path="*">
-            <ErrorLazyComponent />
+            <ErrorBoundary>
+              <ErrorLazyComponent />
+            </ErrorBoundary>
           </Route>
         </Switch>
       </Suspense>
