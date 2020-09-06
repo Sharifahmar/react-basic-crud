@@ -28,7 +28,7 @@ export class ErrorBoundary extends Component {
                 <br />
                 <hr />
                 <br />
-                {this.state.errorInfo.componentStack}
+                {/* {this.state.errorInfo.componentStack} */}
                 </div>
             );
         }

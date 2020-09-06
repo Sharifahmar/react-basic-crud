@@ -1,11 +1,33 @@
-import React from 'react'
-import HeaderComponent from '../Header/HeaderComponent'
+import { Grid, makeStyles } from '@material-ui/core';
+import React from 'react';
+import HeaderComponent from '../Header/HeaderComponent';
+import MovieComponent from '../Movie/MovieComponent';
+import SidebarComponent from '../Sidebar/SidebarComponent';
 
-const HomeComponent = () => {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    }
+}));
+
+
+const HomeComponent = (props) => {
+
+    const classes = useStyles();
+
     return (
-        <div>
-            <HeaderComponent/>
-            <h1>HomeComponent works</h1>
+        <div className={classes.root}>
+            <Grid container>
+                <Grid item md={12}>
+                    <HeaderComponent />
+                </Grid>
+                <Grid item md={2}>
+                    <SidebarComponent/>
+                </Grid>
+                <Grid item md={10}>
+                   <MovieComponent/>
+                </Grid>
+            </Grid>
         </div>
     )
 }
